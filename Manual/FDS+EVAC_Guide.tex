@@ -1796,8 +1796,8 @@ Sec.~\ref{Sec_NumMethod} for details.
 \begin{table}[!b]
 \begin{center}
 \caption{Preference order used in the exit selection algorithm.  The 
-last two rows have no preference.  This is because the agents are
-unaware of the exits that are unfamiliar and invisible and, thus,
+last two rows have no preference because the agents are
+unaware of the exits that are unfamiliar and invisible, and thus
 can not select these exits.  The last column shows the colours used in
 Smokeview to show the status of the agents, if this colouring option
 is chosen by the user.}\label{Table_pref_order}
@@ -1822,13 +1822,13 @@ No preference&no&no&yes&cyan\\ \hline \hline
 
 \noindent The conservative agent type in the present versions of
 FDS+Evac (2.3.0 onwards) is modified from the older versions (prior
-2.3.0).  If there is some smoke at the exit routes then the preference
+2.3.0).  If smoke is found at the exit routes, the preference
 order is modified a little bit.  All visible exits and all known exits
 are put to the same preference group regardless of their familiarity
 when there is smoke on the exit routes as shown in
 Table~\ref{Table_pref_order}, where these are all listed at the
-preference level four (4a--4c).  It is assumed that the agents have
-higher stress and are willing to change their behavior such that any
+preference level four (4a--4c).  It is assumed that the agents are 
+stressed in face of smoke and are willing to change their behavior such that any
 exit that leads out of the smoke is used.  The other modification in
 the present program version is that L1 distance is used to describe
 the walking distance to the non-visible exits and L2 distance is used
@@ -1843,27 +1843,30 @@ corridors and obstacles often make buildings resemble grid geometries.
 This approximation is used because the current version of FDS+Evac
 does not include calculation of the actual shortest path to
 non-visible exits.  While the shortest path calculation is likely to
-be implemented in the future, L1 distance gives rather accurate
+be implemented in the future, L1 distance gives rather good
 approximations in most building geometries.
 
 
-The movement of the conservative agent type is triggered by the user
-given detection time and reaction time distributions.  The detection
-time can be shorter than the user given distribution if there is
-enough smoke to trigger the detection.  The smoke can be detected
-either by the local smoke concentration at position of the agent
-(detection by senses) or detection by a device (usually a smoke or a
-heat detector).  If a conservative agent gets lost then it starts to
-behave like a herding agent for a while until it is able to locate an
-exit by its own reasoning.  An agent is lost when it cannot see any
-exit and does not have any familiar exit in that part of the building.
-This might happen if an agent is using some visible but not familiar
-internal door to go to some other floor or connected space within the
-building.  It might also happen that some of the familiar routes are
+The movement of the conservative type of agents is triggered by probability 
+distributions of detection time and reaction time, which are specified by 
+users in the input file.  Smoke in fire simulation can also activate such 
+detection.  The detection time can thus be shorter than the user given 
+distribution if there is enough smoke to trigger the detection.  The smoke 
+can be detected either by the local smoke concentration at position of the 
+agent (i.e., detection by perception) or by a device (e.g., a smoke or a 
+heat detector).  An agent is said to be lost when it cannot see any exit 
+and does not have any familiar exit in that part of the building.  If a 
+conservative agent gets lost, it starts to behave like a herding agent for 
+a while until it is able to locate an exit by its own reasoning.  This might 
+happen if an agent is using some visible but not familiar internal door to 
+go to some other floors or connected space within the building.  It might also 
+happen that some of the familiar routes are
 blocked by smoke and the agent ends up using an unfamiliar route.
-Conservative type agents could be used in many building evacuation
+Conservative type of agents could be used in many building evacuation
 situations, e.g., the customers in a shopping mall, who know the main
-exits but are not so willing to use special emergency exits.
+exits but are not so willing to use special emergency exits.  
+
+% Maybe it is proper to start a separate paragraph to talk about lost agents.  
 
 
 \subsection{Active Agents}\label{Sec_ActiveAgents}
