@@ -8,11 +8,11 @@
    Technical Research Centre of Finland, 2007, 52~p.
    (http://www.vtt.fi/publications/index.jsp)
 
-&HEAD CHID='OfficeStairs_0p75' TITLE= 'Stairs with EVSS objects' /
+&HEAD CHID='OfficeStairs' TITLE= 'Stairs with EVSS objects' /
 
 &TIME T_END=600.0, DT=0.1 /
 
-&MISC EVACUATION_MC_MODE=.TRUE., EVACUATION_DRILL=.TRUE. /
+&MISC EVACUATION_INITIALIZATION=.TRUE., EVACUATION_DRILL=.TRUE. /
 &RADI RADIATION=.FALSE., /
 
 &DUMP SMOKE3D=.FALSE.,
@@ -28,7 +28,7 @@
  material is defined below, which has only color:
 &SURF ID='EVAC_WALL', RGB = 200,0,200, EVAC_DEFAULT=.TRUE. / or COLOR
 
-&SURF ID='CONCRETE', RGB=0.5,0.5,0.5, DEFAULT=.TRUE.
+&SURF ID='CONCRETE', RGB=0.5,0.5,0.5, DEFAULT=.TRUE.,
       MATL_ID='Betoni', THICKNESS= 0.12/
 
 &MATL ID= 'Betoni', FYI= 'Quintiere, Fire Behavior',
@@ -89,11 +89,11 @@
       XB= 2.00,3.25,  0.00, 0.00, 14.50,14.75, /
 
 &EVSS ID='Sixth2FifthMid', IOR=+2,
-      FAC_V0_UP=0.4, FAC_V0_DOWN=0.75, FAC_V0_HORI=1.0,
+      FAC_V0_UP=0.4, FAC_V0_DOWN=0.2, FAC_V0_HORI=1.0,
       HEIGHT0=0.00, HEIGHT=-1.75, 
       XB= 0.50,1.75, -3.50,-0.25, 18.00,18.25 /
 &EVSS ID='Sixth2FifthLow', IOR=-2,
-      FAC_V0_UP=0.4, FAC_V0_DOWN=0.75, FAC_V0_HORI=1.0,
+      FAC_V0_UP=0.4, FAC_V0_DOWN=0.2, FAC_V0_HORI=1.0,
       HEIGHT0=-1.75, HEIGHT=-3.50, 
       XB= 2.00,3.25, -3.50,-0.25, 18.00,18.25 /
 &EVSS ID='SixthInter', IOR=-2,
@@ -121,11 +121,11 @@
       XB= 2.00,3.25,  0.00, 0.00, 11,11.25, /
 
 &EVSS ID='Fifth2FourthMid', IOR=+2,
-      FAC_V0_UP=0.4, FAC_V0_DOWN=0.75, FAC_V0_HORI=1.0,
+      FAC_V0_UP=0.4, FAC_V0_DOWN=0.2, FAC_V0_HORI=1.0,
       HEIGHT0=0.00, HEIGHT=-1.75, 
       XB= 0.50,1.75, -3.50,-0.25, 14.50,14.75 /
 &EVSS ID='Fifth2FourthLow', IOR=-2,
-      FAC_V0_UP=0.4, FAC_V0_DOWN=0.75, FAC_V0_HORI=1.0,
+      FAC_V0_UP=0.4, FAC_V0_DOWN=0.2, FAC_V0_HORI=1.0,
       HEIGHT0=-1.75, HEIGHT=-3.50, 
       XB= 2.00,3.25, -3.50,-0.25, 14.50,14.75 /
 &EVSS ID='FifthInter', IOR=-2,
@@ -153,11 +153,11 @@
       XB= 2.00,3.25,  0.00, 0.00,  7.50, 7.75 /
 
 &EVSS ID='Fourth2ThirdMid', IOR=+2,
-      FAC_V0_UP=0.4, FAC_V0_DOWN=0.75, FAC_V0_HORI=1.0,
+      FAC_V0_UP=0.4, FAC_V0_DOWN=0.2, FAC_V0_HORI=1.0,
       HEIGHT0=0.00, HEIGHT=-1.75, 
       XB= 0.50,1.75, -3.50,-0.25, 11,11.25 /
 &EVSS ID='Fourth2ThirdLow', IOR=-2,
-      FAC_V0_UP=0.4, FAC_V0_DOWN=0.75, FAC_V0_HORI=1.0,
+      FAC_V0_UP=0.4, FAC_V0_DOWN=0.2, FAC_V0_HORI=1.0,
       HEIGHT0=-1.75, HEIGHT=-3.50, 
       XB= 2.00,3.25, -3.50,-0.25, 11,11.25 /
 &EVSS ID='FourthInter', IOR=-2,
@@ -185,11 +185,11 @@
       XB= 2.00,3.25,  0.00, 0.00,  4, 4.25 /
 
 &EVSS ID='Third2SecondMid', IOR=+2,
-      FAC_V0_UP=0.4, FAC_V0_DOWN=0.75, FAC_V0_HORI=1.0,
+      FAC_V0_UP=0.4, FAC_V0_DOWN=0.2, FAC_V0_HORI=1.0,
       HEIGHT0=0.00, HEIGHT=-1.75, 
       XB= 0.50,1.75, -3.50,-0.25,  7.50, 7.75 /
 &EVSS ID='Third2SecondLow', IOR=-2,
-      FAC_V0_UP=0.4, FAC_V0_DOWN=0.75, FAC_V0_HORI=1.0,
+      FAC_V0_UP=0.4, FAC_V0_DOWN=0.2, FAC_V0_HORI=1.0,
       HEIGHT0=-1.75, HEIGHT=-3.50, 
       XB= 2.00,3.25, -3.50,-0.25,  7.50, 7.75 /
 &EVSS ID='ThirdInter', IOR=-2,
@@ -217,11 +217,11 @@
       XB= 2.00,3.25,  0.00, 0.00,  0, 0.25 /
 
 &EVSS ID='Second2FirstMid', IOR=+2,
-      FAC_V0_UP=0.4, FAC_V0_DOWN=0.75, FAC_V0_HORI=1.0,
+      FAC_V0_UP=0.4, FAC_V0_DOWN=0.2, FAC_V0_HORI=1.0,
       HEIGHT0=0.00, HEIGHT=-1.75,
       XB= 0.50,1.75, -3.50,-0.25,  4, 4.25 /
 &EVSS ID='Second2FirstLow', IOR=-2,
-      FAC_V0_UP=0.4, FAC_V0_DOWN=0.75, FAC_V0_HORI=1.0,
+      FAC_V0_UP=0.4, FAC_V0_DOWN=0.2, FAC_V0_HORI=1.0,
       HEIGHT0=-1.75, HEIGHT=-3.50, 
       XB= 2.00,3.25, -3.50,-0.25,  4, 4.25 /
 &EVSS ID='SecondInter', IOR=-2,
@@ -230,7 +230,7 @@
       XB= 0.50,3.25, -4.75,-3.50,   4, 4.25 /
 
 &EVSS ID='FirstContinue', IOR=+2,
-      FAC_V0_UP=0.4, FAC_V0_DOWN=0.75, FAC_V0_HORI=1.0,
+      FAC_V0_UP=0.4, FAC_V0_DOWN=0.2, FAC_V0_HORI=1.0,
       HEIGHT0=0.00, HEIGHT=0.50, 
       XB= 2.00,3.25, 0.00,1.00,  0.00,0.25 /
 
@@ -802,8 +802,9 @@
       COLOR_METHOD= 0, AVATAR_COLOR='BLUE',
       DET_EVAC_DIST=0, DET_MEAN=0.0,
       PRE_MEAN=1.0,PRE_LOW=0.50,PRE_HIGH=1.5,
-      HUMAN_SMOKE_HEIGHT=1.60,
+      NOT_RANDOM=.FALSE., HUMAN_SMOKE_HEIGHT=1.60,
       OUTPUT_SPEED=.TRUE., OUTPUT_FED=.FALSE.,
-      I_HERDING_TYPE=0,  /
+      OUTPUT_TOTAL_FORCE=.FALSE., OUTPUT_MOTIVE_FORCE=.TRUE.,
+      EVAC_FDS6=.TRUE., I_HERDING_TYPE=0,  /
 
 &TAIL /

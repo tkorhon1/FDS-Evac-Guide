@@ -5,7 +5,7 @@
  110 m x 72 m, roof height: middle of the hall 13 m, sides 3 m, 
  effective height about 15 m.
 
-&HEAD CHID='sportshall_logN2',TITLE='Sporthall, logN, 500 persons lambda=0.3' /
+&HEAD CHID='sportshall_A',TITLE='Sporthall, logN, 500 persons lambda=0.3' /
 
  Main evacuation mesh for the floor.
 &MESH IJK=240,160,1, XB=-5.0,115.0, -6.0,74.0, 0.9,1.1, EVACUATION=.TRUE., 
@@ -13,7 +13,7 @@
 
 &TIME T_END=600.0, DT=0.1 /
 
-&MISC EVACUATION_DRILL=.TRUE., EVACUATION_MC_MODE=.TRUE.,  /
+&MISC EVACUATION_DRILL=.TRUE., EVACUATION_INITIALIZATION=.TRUE.,  /
 &RADI RADIATION=.FALSE., /
 
 &DUMP SMOKE3D=.FALSE.,

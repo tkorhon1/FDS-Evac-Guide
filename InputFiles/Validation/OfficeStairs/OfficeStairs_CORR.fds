@@ -8,11 +8,13 @@
    Technical Research Centre of Finland, 2007, 52~p.
    (http://www.vtt.fi/publications/index.jsp)
 
-&HEAD CHID='OfficeStairs_0p75' TITLE= 'Stairs with EVSS objects' /
+&HEAD CHID='OfficeStairs_CORR' TITLE= 'Stairs with CORR objects' /
+
+ Note: the intermediate landings are treated using EVSS
 
 &TIME T_END=600.0, DT=0.1 /
 
-&MISC EVACUATION_MC_MODE=.TRUE., EVACUATION_DRILL=.TRUE. /
+&MISC EVACUATION_INITIALIZATION=.TRUE., EVACUATION_DRILL=.TRUE. /
 &RADI RADIATION=.FALSE., /
 
 &DUMP SMOKE3D=.FALSE.,
@@ -26,9 +28,9 @@
  Default material for evacuation meshes is INERT and its color
  can not be changed esily in Smokeview. Thus, an evacuation 
  material is defined below, which has only color:
-&SURF ID='EVAC_WALL', RGB = 200,0,200, EVAC_DEFAULT=.TRUE. / or COLOR
+&SURF ID='EVAC_WALL', RGB = 200,0,200, EVAC_DEFAULT=.TRUE., / or COLOR
 
-&SURF ID='CONCRETE', RGB=0.5,0.5,0.5, DEFAULT=.TRUE.
+&SURF ID='CONCRETE', RGB=0.5,0.5,0.5, DEFAULT=.TRUE.,
       MATL_ID='Betoni', THICKNESS= 0.12/
 
 &MATL ID= 'Betoni', FYI= 'Quintiere, Fire Behavior',
@@ -80,22 +82,36 @@
 &OBST XB=  1.75,2.00, -3.50, 0.25, 18,18.25, EVACUATION=.TRUE. / railing
 &OBST XB=  2.00,3.25, -0.25, 0.00, 18,18.25, EVACUATION=.TRUE. / obst for the evac vent
 
-&DOOR ID='Door6to5', IOR=+2,
+ DOOR ID='Door6to5', IOR=+2,
       KEEP_XY=.TRUE., COLOR='ORANGE',
       TO_NODE='Entry6to5', 
       XB= 2.00,3.25, -0.25,-0.25, 18,18.25, /
-&ENTR ID='Entry6to5', IOR=+2,
-      COLOR='MAROON', 
+ ENTR ID='Entry6to5', IOR=+2,
+      COLOR='MAROON',
       XB= 2.00,3.25,  0.00, 0.00, 14.50,14.75, /
 
-&EVSS ID='Sixth2FifthMid', IOR=+2,
-      FAC_V0_UP=0.4, FAC_V0_DOWN=0.75, FAC_V0_HORI=1.0,
-      HEIGHT0=0.00, HEIGHT=-1.75, 
+&DOOR KNOWN_DOOR=.TRUE., ID='Door6toCorr', IOR=-2,
+      COLOR='ORANGE',
+      TO_NODE='Sixth2FifthMid', 
+      XB= 0.50,1.75, -0.25,-0.25, 18,18.25, /
+&CORR ID='Sixth2FifthMid', MAX_HUMANS_INSIDE=10,
+      FAC_SPEED=0.2, EFF_LENGTH=3.7, 
+      TO_NODE='Entr6Inter',
       XB= 0.50,1.75, -3.50,-0.25, 18.00,18.25 /
-&EVSS ID='Sixth2FifthLow', IOR=-2,
-      FAC_V0_UP=0.4, FAC_V0_DOWN=0.75, FAC_V0_HORI=1.0,
-      HEIGHT0=-1.75, HEIGHT=-3.50, 
+&ENTR ID='Entr6Inter', IOR=-2,
+      COLOR='MAROON',
+      XB= 0.50,1.75, -3.50,-3.50, 18.00,18.25, /
+&DOOR KNOWN_DOOR=.TRUE., ID='Door6toCorrLow', IOR=+2,
+      COLOR='ORANGE',
+      TO_NODE='Sixth2FifthLow', 
+      XB= 2.00,3.25, -3.50,-3.50, 18,18.25, /
+&CORR ID='Sixth2FifthLow',  MAX_HUMANS_INSIDE=10,
+      FAC_SPEED=0.2, EFF_LENGTH=3.7,
+      TO_NODE='Entry6to5',
       XB= 2.00,3.25, -3.50,-0.25, 18.00,18.25 /
+&ENTR ID='Entry6to5', IOR=+2,
+      COLOR='MAROON',
+      XB= 2.00,3.25,  0.00, 0.00, 14.50,14.75, /
 &EVSS ID='SixthInter', IOR=-2,
       FAC_V0_UP=1.0, FAC_V0_DOWN=1.0, FAC_V0_HORI=1.0,
       HEIGHT0=-1.75, HEIGHT=-1.75, 
@@ -112,26 +128,40 @@
 &OBST XB=  1.75,2.00, -3.50, 0.25, 14.50,14.75, EVACUATION=.TRUE. / railing
 &OBST XB=  2.00,3.25, -0.25, 0.00, 14.50,14.75, EVACUATION=.TRUE. / obst for the evac vent
 
-&DOOR ID='Door5to4', IOR=+2,
+ DOOR ID='Door5to4', IOR=+2,
       KEEP_XY=.TRUE., COLOR='ORANGE',
       TO_NODE='Entry5to4', 
       XB= 2.00,3.25, -0.25,-0.25, 14.50,14.75 /
-&ENTR ID='Entry5to4', IOR=+2,
+ ENTR ID='Entry5to4', IOR=+2,
       COLOR='MAROON',
       XB= 2.00,3.25,  0.00, 0.00, 11,11.25, /
 
-&EVSS ID='Fifth2FourthMid', IOR=+2,
-      FAC_V0_UP=0.4, FAC_V0_DOWN=0.75, FAC_V0_HORI=1.0,
-      HEIGHT0=0.00, HEIGHT=-1.75, 
+&DOOR KNOWN_DOOR=.TRUE., ID='Door5toCorr', IOR=-2,
+      COLOR='ORANGE',
+      TO_NODE='Fifth2FourthMid', 
+      XB= 0.50,1.75, -0.25,-0.25, 14.50,14.75 /
+&CORR ID='Fifth2FourthMid', MAX_HUMANS_INSIDE=10,
+      FAC_SPEED=0.2, EFF_LENGTH=3.7, 
+      TO_NODE='Entr5Inter',
       XB= 0.50,1.75, -3.50,-0.25, 14.50,14.75 /
-&EVSS ID='Fifth2FourthLow', IOR=-2,
-      FAC_V0_UP=0.4, FAC_V0_DOWN=0.75, FAC_V0_HORI=1.0,
-      HEIGHT0=-1.75, HEIGHT=-3.50, 
+&ENTR ID='Entr5Inter', IOR=-2,
+      COLOR='MAROON',
+      XB= 0.50,1.75, -3.50,-3.50, 14.50,14.75 /
+&DOOR KNOWN_DOOR=.TRUE., ID='Door5toCorrLow', IOR=+2,
+      COLOR='ORANGE',
+      TO_NODE='Fifth2FourthLow', 
+      XB= 2.00,3.25, -3.50,-3.50, 14.50,14.75, /
+&CORR ID='Fifth2FourthLow',  MAX_HUMANS_INSIDE=10,
+      FAC_SPEED=0.2, EFF_LENGTH=3.7,
+      TO_NODE='Entry5to4',
       XB= 2.00,3.25, -3.50,-0.25, 14.50,14.75 /
+&ENTR ID='Entry5to4', IOR=+2,
+      COLOR='MAROON',
+      XB= 2.00,3.25,  0.00, 0.00, 11,11.25, /
 &EVSS ID='FifthInter', IOR=-2,
       FAC_V0_UP=1.0, FAC_V0_DOWN=1.0, FAC_V0_HORI=1.0,
       HEIGHT0=-1.75, HEIGHT=-1.75, 
-      XB= 0.50,3.25, -4.75,-3.50, 14.50,14.75 /
+      XB= 0.50,3.25, -4.75,-3.50, 14.50,14.75, /
                                                                      
  4th floor mesh
 &OBST XB= -0.25,0.50, -5.00, 0.00, 11,11.25, EVACUATION=.TRUE. /
@@ -144,22 +174,36 @@
 &OBST XB=  1.75,2.00, -3.50, 0.25, 11,11.25, EVACUATION=.TRUE. / railing
 &OBST XB=  2.00,3.25, -0.25, 0.00, 11,11.25, EVACUATION=.TRUE. / obst for the evac vent
 
-&DOOR ID='Door4to3', IOR=+2,
+ DOOR ID='Door4to3', IOR=+2,
       KEEP_XY=.TRUE., COLOR='ORANGE',
       TO_NODE='Entry4to3', 
       XB= 2.00,3.25, -0.25,-0.25, 11,11.25 /
-&ENTR ID='Entry4to3', IOR=+2,
+ ENTR ID='Entry4to3', IOR=+2,
       COLOR='MAROON',
       XB= 2.00,3.25,  0.00, 0.00,  7.50, 7.75 /
 
-&EVSS ID='Fourth2ThirdMid', IOR=+2,
-      FAC_V0_UP=0.4, FAC_V0_DOWN=0.75, FAC_V0_HORI=1.0,
-      HEIGHT0=0.00, HEIGHT=-1.75, 
+&DOOR KNOWN_DOOR=.TRUE., ID='Door4toCorr', IOR=-2,
+      COLOR='ORANGE',
+      TO_NODE='Fourth2ThirdMid', 
+      XB= 0.50,1.75, -0.25,-0.25, 11,11.25 /
+&CORR ID='Fourth2ThirdMid', MAX_HUMANS_INSIDE=10,
+      FAC_SPEED=0.2, EFF_LENGTH=3.7, 
+      TO_NODE='Entr4Inter',
       XB= 0.50,1.75, -3.50,-0.25, 11,11.25 /
-&EVSS ID='Fourth2ThirdLow', IOR=-2,
-      FAC_V0_UP=0.4, FAC_V0_DOWN=0.75, FAC_V0_HORI=1.0,
-      HEIGHT0=-1.75, HEIGHT=-3.50, 
+&ENTR ID='Entr4Inter', IOR=-2,
+      COLOR='MAROON',
+      XB= 0.50,1.75, -3.50,-3.50, 11,11.25 /
+&DOOR KNOWN_DOOR=.TRUE., ID='Door4toCorrLow', IOR=+2,
+      COLOR='ORANGE',
+      TO_NODE='Fourth2ThirdLow', 
+      XB= 2.00,3.25, -3.50,-3.50, 11,11.25, /
+&CORR ID='Fourth2ThirdLow',  MAX_HUMANS_INSIDE=10,
+      FAC_SPEED=0.2, EFF_LENGTH=3.7,
+      TO_NODE='Entry4to3',
       XB= 2.00,3.25, -3.50,-0.25, 11,11.25 /
+&ENTR ID='Entry4to3', IOR=+2,
+      COLOR='MAROON',
+      XB= 2.00,3.25,  0.00, 0.00,  7.50, 7.75, /
 &EVSS ID='FourthInter', IOR=-2,
       FAC_V0_UP=1.0, FAC_V0_DOWN=1.0, FAC_V0_HORI=1.0,
       HEIGHT0=-1.75, HEIGHT=-1.75, 
@@ -176,22 +220,36 @@
 &OBST XB=  1.75,2.00, -3.50, 0.25,  7.50, 7.75, EVACUATION=.TRUE. / railing
 &OBST XB=  2.00,3.25, -0.25, 0.00,  7.50, 7.75, EVACUATION=.TRUE. / obst for the evac vent
 
-&DOOR ID='Door3to2', IOR=+2,
+ DOOR ID='Door3to2', IOR=+2,
       KEEP_XY=.TRUE., COLOR='ORANGE',
       TO_NODE='Entry3to2', 
       XB= 2.00,3.25, -0.25,-0.25, 7.50, 7.75 /
-&ENTR ID='Entry3to2', IOR=+2,
+ ENTR ID='Entry3to2', IOR=+2,
       COLOR='MAROON',
       XB= 2.00,3.25,  0.00, 0.00,  4, 4.25 /
 
-&EVSS ID='Third2SecondMid', IOR=+2,
-      FAC_V0_UP=0.4, FAC_V0_DOWN=0.75, FAC_V0_HORI=1.0,
-      HEIGHT0=0.00, HEIGHT=-1.75, 
-      XB= 0.50,1.75, -3.50,-0.25,  7.50, 7.75 /
-&EVSS ID='Third2SecondLow', IOR=-2,
-      FAC_V0_UP=0.4, FAC_V0_DOWN=0.75, FAC_V0_HORI=1.0,
-      HEIGHT0=-1.75, HEIGHT=-3.50, 
-      XB= 2.00,3.25, -3.50,-0.25,  7.50, 7.75 /
+&DOOR KNOWN_DOOR=.TRUE., ID='Door3toCorr', IOR=-2,
+      COLOR='ORANGE',
+      TO_NODE='Third2SecondMid', 
+      XB= 0.50,1.75, -0.25,-0.25, 7.50, 7.75 /
+&CORR ID='Third2SecondMid', MAX_HUMANS_INSIDE=10,
+      FAC_SPEED=0.2, EFF_LENGTH=3.7, 
+      TO_NODE='Entr3Inter',
+      XB= 0.50,1.75, -3.50,-0.25, 7.50, 7.75 /
+&ENTR ID='Entr3Inter', IOR=-2,
+      COLOR='MAROON',
+      XB= 0.50,1.75, -3.50,-3.50, 7.50, 7.75 /
+&DOOR KNOWN_DOOR=.TRUE., ID='Door3toCorrLow', IOR=+2,
+      COLOR='ORANGE',
+      TO_NODE='Third2SecondLow', 
+      XB= 2.00,3.25, -3.50,-3.50, 7.50, 7.75 /
+&CORR ID='Third2SecondLow',  MAX_HUMANS_INSIDE=10,
+      FAC_SPEED=0.2, EFF_LENGTH=3.7,
+      TO_NODE='Entry3to2',
+      XB= 2.00,3.25, -3.50,-0.25, 7.50, 7.75 /
+&ENTR ID='Entry3to2', IOR=+2,
+      COLOR='MAROON',
+      XB= 2.00,3.25,  0.00, 0.00,   4, 4.25, /
 &EVSS ID='ThirdInter', IOR=-2,
       FAC_V0_UP=1.0, FAC_V0_DOWN=1.0, FAC_V0_HORI=1.0,
       HEIGHT0=-1.75, HEIGHT=-1.75, 
@@ -208,31 +266,42 @@
 &OBST XB=  1.75,2.00, -3.50, 0.25,  4, 4.25, EVACUATION=.TRUE. / railing
 &OBST XB=  2.00,3.25, -0.25, 0.00,  4, 4.25, EVACUATION=.TRUE. / obst for the evac vent
 
-&DOOR ID='Door2to1', IOR=+2,
+ DOOR ID='Door2to1', IOR=+2,
       KEEP_XY=.TRUE., COLOR='ORANGE',
       TO_NODE='Entry2to1', 
       XB= 2.00,3.25, -0.25,-0.25, 4, 4.25 /
-&ENTR ID='Entry2to1', IOR=+2,
+ ENTR ID='Entry2to1', IOR=+2,
       COLOR='MAROON',
       XB= 2.00,3.25,  0.00, 0.00,  0, 0.25 /
 
-&EVSS ID='Second2FirstMid', IOR=+2,
-      FAC_V0_UP=0.4, FAC_V0_DOWN=0.75, FAC_V0_HORI=1.0,
-      HEIGHT0=0.00, HEIGHT=-1.75,
-      XB= 0.50,1.75, -3.50,-0.25,  4, 4.25 /
-&EVSS ID='Second2FirstLow', IOR=-2,
-      FAC_V0_UP=0.4, FAC_V0_DOWN=0.75, FAC_V0_HORI=1.0,
-      HEIGHT0=-1.75, HEIGHT=-3.50, 
-      XB= 2.00,3.25, -3.50,-0.25,  4, 4.25 /
+&DOOR KNOWN_DOOR=.TRUE., ID='Door2toCorr', IOR=-2,
+      COLOR='ORANGE',
+      TO_NODE='Second2FirstMid', 
+      XB= 0.50,1.75, -0.25,-0.25, 4, 4.25 /
+&CORR ID='Second2FirstMid', MAX_HUMANS_INSIDE=10,
+      FAC_SPEED=0.2, EFF_LENGTH=3.7, 
+      TO_NODE='Entr2Inter',
+      XB= 0.50,1.75, -3.50,-0.25, 4, 4.25 /
+&ENTR ID='Entr2Inter', IOR=-2,
+      COLOR='MAROON',
+      XB= 0.50,1.75, -3.50,-3.50, 4, 4.25 /
+&DOOR KNOWN_DOOR=.TRUE., ID='Door2toCorrLow', IOR=+2,
+      COLOR='ORANGE',
+      TO_NODE='Second2FirstLow', 
+      XB= 2.00,3.25, -3.50,-3.50, 4, 4.25 /
+&CORR ID='Second2FirstLow',  MAX_HUMANS_INSIDE=13,
+      FAC_SPEED=0.2, EFF_LENGTH=4.8,
+      TO_NODE='Entry2to1',
+      XB= 2.00,3.25, -3.50, 0.75, 4, 4.25 /
+      XB= 2.00,3.25, -3.50, 0.75, 4, 4.25  
+&ENTR ID='Entry2to1', IOR=+2,
+      COLOR='MAROON',
+      XB= 2.00,3.25,  0.75, 0.75,   0, 0.25, /
+      XB= 2.00,3.25,  0.00, 0.00,   0, 0.25, 
 &EVSS ID='SecondInter', IOR=-2,
       FAC_V0_UP=1.0, FAC_V0_DOWN=1.0, FAC_V0_HORI=1.0,
       HEIGHT0=-1.75, HEIGHT=-1.75, 
       XB= 0.50,3.25, -4.75,-3.50,   4, 4.25 /
-
-&EVSS ID='FirstContinue', IOR=+2,
-      FAC_V0_UP=0.4, FAC_V0_DOWN=0.75, FAC_V0_HORI=1.0,
-      HEIGHT0=0.00, HEIGHT=0.50, 
-      XB= 2.00,3.25, 0.00,1.00,  0.00,0.25 /
 
  1st floor mesh
 &OBST XB= 0.25,3.50, -3.25,-3.00, 0.00, 0.25, EVACUATION=.TRUE. /
@@ -240,8 +309,11 @@
 &OBST XB= 0.25,0.50,  2.25,11.75, 0.00,0.25, EVACUATION=.TRUE.,/
 &OBST XB= 3.25,3.50, -3.25, 1.25, 0.00,0.25, EVACUATION=.TRUE.,/
 &OBST XB= 3.25,3.50,  2.25,11.75, 0.00,0.25, EVACUATION=.TRUE.,/
+ TIMO
 &OBST XB= 1.75,2.00, -3.25, 1.25, 0.00,0.25, EVACUATION=.TRUE.,/
+ OBST XB= 1.75,2.00, -3.25, 2.00, 0.00,0.25, EVACUATION=.TRUE.,/
 &OBST XB= 2.00,3.25, -3.00,-0.25, 0.00,0.25, EVACUATION=.TRUE.,/
+
 
  columns
 &OBST XB= 1.75,2.00, 2.25,3.00, 0,0.25, EVACUATION=.TRUE.,/
@@ -408,7 +480,6 @@
 &OBST XB= 2 3.25 0.266666666666667 0.511111111111112 0.374999999999983 0.249999999999983 , EVACUATION=.FALSE. ,SURF_ID='CONCRETE' /
 &OBST XB= 2 3.25 0.511111111111112 0.755555555555556 0.249999999999983 0.124999999999983 , EVACUATION=.FALSE. ,SURF_ID='CONCRETE' /
 &OBST XB= 2 3.25 0.755555555555556 1 0.124999999999983 -1.68753899743024E-14 , EVACUATION=.FALSE. ,SURF_ID='CONCRETE' /
-
 
 &ENTR ID='ENTR6thFlRight',IOR=-1, AGENT_TYPE=2,
       KNOWN_DOOR_NAMES='DEK22B', KNOWN_DOOR_PROBS=1.0,

@@ -1,7 +1,7 @@
  FDS+Evac version: FDS 6.7.6, Evac 2.6.0 (GIT FDS6.7.6-226)
  All material properties etc. are completely fabricated.
 
-&HEAD CHID='bended_corridor2',TITLE='Corr 7.2m, Uni(1,0.5)s, lam=0.3, 1000 persons ' /
+&HEAD CHID='bended_corridor_A',TITLE='Corr 7.2m, Uni(1,0.5)s, 1000 persons ' /
  
  FIRST FLOOR, MAIN EVAC GRID
 &MESH IJK=256,128,1, EVACUATION=.TRUE., XB=-0.8,101.6, -0.4,50.8, 0.9,1.1
@@ -9,8 +9,8 @@
 
 &TIME T_END=600.0, DT=0.5 /
 
- MISC EVACUATION_INITIALIZATION=.TRUE., EVACUATION_DRILL=.TRUE., /
-&MISC EVACUATION_MC_MODE=.TRUE., EVACUATION_DRILL=.TRUE., /
+&MISC EVACUATION_INITIALIZATION=.TRUE., EVACUATION_DRILL=.TRUE., /
+ MISC EVACUATION_MC_MODE=.TRUE., EVACUATION_DRILL=.TRUE., /
 &RADI RADIATION=.FALSE./
 
 &DUMP SMOKE3D=.FALSE.,
@@ -48,7 +48,7 @@
       DEFAULT_PROPERTIES='Adult',
       PRE_EVAC_DIST=1, PRE_LOW=0.5,PRE_HIGH=1.5,
       DET_EVAC_DIST=0, DET_MEAN=0.0,
-      L_NON_SP=0.3,
+      L_NON_SP=0.5,
       TDET_SMOKE_DENS=0.1 ,
       HUMAN_SMOKE_HEIGHT=1.60,
       DENS_INIT = 4,
@@ -57,28 +57,28 @@
 &PERS ID='Male',
       FYI='Default adult: male',
       DEFAULT_PROPERTIES='Male',
-      L_NON_SP=0.3,
+      L_NON_SP=0.5,
       PRE_EVAC_DIST=1, PRE_LOW=0.5,PRE_HIGH=1.5,
       DET_EVAC_DIST=0, DET_MEAN=0.0 /
 
 &PERS ID='Female',
       FYI='Default adult: female',
       DEFAULT_PROPERTIES='Female',
-      L_NON_SP=0.3,
+      L_NON_SP=0.5,
       PRE_EVAC_DIST=1, PRE_LOW=0.5,PRE_HIGH=1.5,
       DET_EVAC_DIST=0, DET_MEAN=0.0 /
 
 &PERS ID='Elderly',
       FYI='Default adult: elderly',
       DEFAULT_PROPERTIES='Elderly',
-      L_NON_SP=0.3,
+      L_NON_SP=0.5,
       PRE_EVAC_DIST=1, PRE_LOW=0.5,PRE_HIGH=1.5,
       DET_EVAC_DIST=0, DET_MEAN=0.0 /
 
 &PERS ID='Child',
       FYI='Default child',
       DEFAULT_PROPERTIES='Child',
-      L_NON_SP=0.3,
+      L_NON_SP=0.5,
       PRE_EVAC_DIST=1, PRE_LOW=0.5,PRE_HIGH=1.5,
       DET_EVAC_DIST=0, DET_MEAN=0.0 /
 

@@ -4,14 +4,14 @@
  An open floor office, 3 stairs, stair 1 is used in this example.
  Reaction time: Normal distribution, ave=90s, sigma=11s
 
-&HEAD CHID='office_d3', TITLE='OpenFloorOffice, door 1, N(90s,11s)' /
+&HEAD CHID='office', TITLE='OpenFloorOffice, door 1, N(90s,11s)' /
 
 &MESH IJK=200,200,1, XB=0.0,40.0, 0.0,40.0, 0.95,1.05, EVACUATION=.TRUE., 
       EVAC_HUMANS=.TRUE., EVAC_Z_OFFSET=1.0, ID= 'FF1stFloor' /
 
 &TIME T_END=300.0, DT=0.1 /
 
-&MISC EVACUATION_DRILL=.TRUE., EVACUATION_MC_MODE=.TRUE.,  /
+&MISC EVACUATION_DRILL=.TRUE., EVACUATION_INITIALIZATION=.TRUE.,  /
 &RADI RADIATION=.FALSE., /
 
 &DUMP SMOKE3D=.FALSE.,
@@ -122,19 +122,19 @@
 &OBST XB= 30.8,34.0, 23.2,26.4, 0.95,1.05, SURF_ID='WALL' /
 &OBST XB= 10.0,13.2, 23.2,26.4, 0.95,1.05, SURF_ID='WALL' /
 
-&EXIT ID='Exit1', IOR = +1, KNOWN_DOOR=.FALSE., TIME_OPEN=10000.0,
+&EXIT ID='Exit1', IOR = +1,
       FYI = 'Comment line',
       COUNT_ONLY=.FALSE.,
       XYZ=17.4, 11.0, 1.0,
       XB =18.6,18.6, 10.6,11.8, 0.95,1.05 / 
 
-&EXIT ID='Exit2', IOR = +1, KNOWN_DOOR=.FALSE., TIME_OPEN=10000.0,
+&EXIT ID='Exit2', IOR = +1,
       FYI = 'Comment line',
       COUNT_ONLY=.FALSE. ,
       XYZ=17.4, 28.0, 1.0,
       XB =18.6,18.6, 27.6,28.8, 0.95,1.05 / 
 
-&EXIT ID='Exit3', IOR = +1, KNOWN_DOOR=.TRUE.,
+&EXIT ID='Exit3', IOR = +1,
       FYI = 'Comment line',
       COUNT_ONLY=.FALSE. ,
       XYZ=26.8, 28.0, 1.0,
