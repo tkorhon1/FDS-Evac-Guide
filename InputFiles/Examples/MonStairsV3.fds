@@ -1,4 +1,4 @@
- FDS+Evac version: FDS 6.6.0, Evac 2.5.2 (GIT FDS6.6.0-914)
+ FDS+Evac version: FDS 6.7.6, Evac 2.6.0 (GIT FDS6.7.6-336)
  All material properties etc. are completely fabricated.
 
  And example of "wide" stairs connecting two floors.  This
@@ -41,7 +41,7 @@
 
 &TIME T_END=120.0, DT=0.05 / 
 
-&MISC EVACUATION_DRILL=.TRUE., / 
+&MISC EVACUATION_DRILL=.TRUE., EVACUATION_INITIALIZATION=.TRUE. / 
       Note: Now no fire meshes: RADIATION=.FALSE. saves some CPU time and memory
 &RADI RADIATION=.FALSE., /
 

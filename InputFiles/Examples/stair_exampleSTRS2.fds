@@ -1,4 +1,4 @@
- FDS+Evac version: FDS 6.6.0, Evac 2.5.2 (GIT FDS6.6.0-914)
+ FDS+Evac version: FDS 6.7.6, Evac 2.6.0 (GIT FDS6.7.6-336)
  All material properties etc. are completely fabricated.
 
  Two floor evacuation test case:
@@ -36,7 +36,7 @@
 
  Note: EVACUATION_MC_MODE=.TRUE. try to read eff and fed files.
        EVACUATION_DRILL=.TRUE. do not read (and use) the fed file.
-&MISC EVACUATION_MC_MODE=.FALSE., EVACUATION_DRILL=.TRUE., / 
+&MISC EVACUATION_MC_MODE=.FALSE., EVACUATION_DRILL=.TRUE., EVACUATION_INITIALIZATION=.TRUE./ 
       Note: If no fire meshes: RADIATION=.FALSE. saves some CPU time and memory
 &RADI RADIATION=.FALSE., /
 

@@ -1,4 +1,4 @@
- FDS+Evac version: FDS 6.7.0, Evac 2.5.2 (GIT FDS6.7.0-31)
+ FDS+Evac version: FDS 6.7.6, Evac 2.6.0 (GIT FDS6.7.6-336)
  All material properties etc. are completely fabricated.
 
  A geometry, which can be used to calculate specific human
@@ -12,7 +12,7 @@
   
 &TIME T_END= 200 , DT=0.1 /
 
-&MISC EVACUATION_MC_MODE=.FALSE., EVACUATION_DRILL=.TRUE., /
+&MISC EVACUATION_INITIALIZATION=.TRUE., EVACUATION_DRILL=.TRUE., EVACUATION_MC_MODE=.FALSE./
 &RADI RADIATION=.FALSE., /
 
 &DUMP SMOKE3D=.FALSE.,

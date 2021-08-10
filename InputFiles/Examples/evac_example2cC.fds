@@ -1,10 +1,17 @@
- FDS+Evac version: FDS 6.6.0, Evac 2.5.2 (GIT FDS6.6.0-914)
+ FDS+Evac version: FDS 6.7.6, Evac 2.6.0 (GIT FDS6.7.6-336)
  All material properties etc. are completely fabricated.
 
  Two floor evacuation test case, the rooms have two doors.
  See the FDS+Evac Guide, Chapter "Sample Input Files"
 
-&HEAD CHID='evac_example2d', TITLE='Test 2, fire only' / 
+&HEAD CHID='evac_example2cC', TITLE='Test 2, evacuation drill mode'  / 
+ Full fire + evacuation calculation that has 3 steps:
+ Step A: EVACUATION_INITIALIZATION=.TRUE. => eff-file
+ Step B: EVACUATION_WRITE_FED=.TRUE.      => fed-file
+ Step C: EVACUATION_MC_MODE=.TRUE.        => read eff and fed
+ Evacuation "MC mode" calculation that has 2 steps:
+ Step A: EVACUATION_INITIALIZATION=.TRUE. => eff-file
+ Step C: EVACUATION_MC_MODE=.TRUE.        => read eff
 
  Fire mesh(es).
 &MESH IJK=54,50,25, XB= -0.2,10.6,  0.0,10.0, 0.0,5.0 /
@@ -42,7 +49,9 @@
 
 &TIME T_END=200.0, DT=0.05 / 
 
-&MISC EVACUATION_MC_MODE=.FALSE., EVACUATION_DRILL=.FALSE., NO_EVACUATION=.TRUE. / 
+ Note: EVACUATION_MC_MODE=.TRUE. try to read eff and fed files.
+       EVACUATION_DRILL=.TRUE. do not read (and use) the fed file.
+&MISC EVACUATION_MC_MODE=.TRUE., EVACUATION_DRILL=.TRUE., / 
 
 &DUMP SMOKE3D=.TRUE.,
       NFRAMES=200,
@@ -53,33 +62,28 @@
       DT_PL3D=100.0,
       DT_ISOF=5.0 /
 
-&REAC ID         = 'POLYURETHANE',
-      FUEL       = 'myPOLYURETHANE',
-      FYI        = 'C_6.3 H_7.1 N O_2.1, NFPA Handbook, Babrauskas',
+&REAC ID         = 'PROPANE',
+      FUEL       = 'PROPANE',
       SOOT_YIELD = 0.10,
-      CO_YIELD   = 0.05,
-      N          = 1.0,
-      C          = 6.3,
-      H          = 7.1,
-      O          = 2.1  /
+      CO_YIELD   = 0.05, /
 
 &SURF ID='BURNER', HRRPUA=1000., COLOR='RASPBERRY' /
 
-&MATL ID            = 'GYPSUM PLASTER',
-      FYI           = 'Quintiere, Fire Behavior',
-      CONDUCTIVITY  = 0.48,
-      SPECIFIC_HEAT = 0.84,
+&MATL ID            = 'GYPSUM PLASTER'
+      FYI           = 'Quintiere, Fire Behavior'
+      CONDUCTIVITY  = 0.48
+      SPECIFIC_HEAT = 0.84
       DENSITY       = 1440. /
 
 &SURF ID             = 'WALL', DEFAULT=.TRUE.,
-      RGB            = 100,100,100,
-      MATL_ID        = 'GYPSUM PLASTER',
+      RGB            = 100,100,100
+      MATL_ID        = 'GYPSUM PLASTER'
       THICKNESS      = 0.012 /
 
  Default material for evacuation meshes is INERT and its color
  can not be changed esily in Smokeview. Thus, an evacuation 
  material is defined below, which has only color:
-&SURF ID='EVAC_WALL', RGB= 200,0,200, EVAC_DEFAULT=.TRUE. / or COLOR
+&SURF ID    = 'EVAC_WALL', RGB= 200,0,200, EVAC_DEFAULT=.TRUE.  / or COLOR
 
 ============= FIRE FDS GEOMETRY STARTS ================
 

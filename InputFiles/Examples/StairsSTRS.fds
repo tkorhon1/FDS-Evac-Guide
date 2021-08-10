@@ -1,4 +1,4 @@
- FDS+Evac version: FDS 6.6.0, Evac 2.5.2 (GIT FDS6.6.0-914)
+ FDS+Evac version: FDS 6.7.6, Evac 2.6.0 (GIT FDS6.7.6-336)
  All material properties etc. are completely fabricated.
 
  An example staircase using STRS model for the stairs.
@@ -25,7 +25,7 @@
       XB_LANDINGS( 2,:)=  4.6, 6.1, -0.1,4.9, -0.9,-0.7,
       FAC_V0_UP=0.4, FAC_V0_DOWN=0.75, FAC_V0_HORI=1.0, /
 
-&MISC EVACUATION_DRILL=.TRUE., NO_EVACUATION=.FALSE. /
+&MISC EVACUATION_DRILL=.TRUE., NO_EVACUATION=.FALSE., EVACUATION_INITIALIZATION=.TRUE./
 &RADI RADIATION=.FALSE., /
 
  Choose a color for the evacuation mesh OBSTs

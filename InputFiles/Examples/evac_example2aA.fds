@@ -1,10 +1,17 @@
- FDS+Evac version: FDS 6.6.0, Evac 2.5.2 (GIT FDS6.6.0-914)
+ FDS+Evac version: FDS 6.7.6, Evac 2.6.0 (GIT FDS6.7.6-336)
  All material properties etc. are completely fabricated.
 
  Two floor evacuation test case, the rooms have two doors.
  See the FDS+Evac Guide, Chapter "Sample Input Files"
 
-&HEAD CHID='evac_example2a', TITLE='Test 2, fire+evac'  / 
+&HEAD CHID='evac_example2aA', TITLE='Test 2, fire+evac'  / 
+ Full fire + evacuation calculation that has 3 steps:
+ Step A: EVACUATION_INITIALIZATION=.TRUE. => eff-file
+ Step B: EVACUATION_WRITE_FED=.TRUE.      => fed-file
+ Step C: EVACUATION_MC_MODE=.TRUE.        => read eff and fed
+ Evacuation "MC mode" calculation that has 2 steps:
+ Step A: EVACUATION_INITIALIZATION=.TRUE. => eff-file
+ Step C: EVACUATION_MC_MODE=.TRUE.        => read eff
 
  Fire mesh(es).
 &MESH IJK=54,50,25, XB= -0.2,10.6,  0.0,10.0, 0.0,5.0 /
@@ -42,7 +49,9 @@
 
 &TIME T_END=200.0, DT=0.05 / 
 
-&MISC EVACUATION_MC_MODE=.FALSE., EVACUATION_DRILL=.FALSE., / 
+&MISC EVACUATION_INITIALIZATION=.TRUE., / 
+ Note: False is the default for the three keywords below:
+ MISC EVACUATION_INITIALIZATION=.FALSE.,  EVACUATION_WRITE_FED=.FALSE., EVACUATION_MC_MODE=.FALSE.,  / 
 
 &DUMP SMOKE3D=.TRUE.,
       NFRAMES=200,
