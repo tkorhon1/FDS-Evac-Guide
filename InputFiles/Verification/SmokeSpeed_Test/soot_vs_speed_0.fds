@@ -1,7 +1,9 @@
- FDS+Evac version: FDS 6.7.0, Evac 2.5.2 (GIT FDS6.7.0-31)
+ FDS+Evac version: FDS 6.7.6, Evac 2.6.0 (GIT FDS6.7.6-226)
  All material properties are completely fabricated.
 
 &HEAD CHID='soot_vs_speed_0', TITLE='Test soot dens vs speed'  / 
+
+This is to get the fed file
 
  The fire mesh, the test case uses constant fire properties, 
  so the fire mesh need not to be dense (now dx=dy=dz= 0.5 m)
@@ -28,7 +30,7 @@
  p=101325.0 Pa
  pV=(m/M)RT ==> rho = pM/(RT) =  1.19844757 kg/m3
 
-&MISC TMPA=20.0, NOISE=.FALSE.,/
+&MISC TMPA=20.0, NOISE=.FALSE., EVACUATION_WRITE_FED=.TRUE.,/
 &RADI RADIATION=.FALSE., /
  SPEC ID='AIR', BACKGROUND=.TRUE. / now simple chemistry is used, no backround given
 

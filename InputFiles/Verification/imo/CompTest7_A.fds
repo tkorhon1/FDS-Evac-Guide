@@ -1,4 +1,4 @@
- FDS+Evac version: FDS 6.6.0, Evac 2.5.2 (GIT FDS6.6.0-914)
+ FDS+Evac version: FDS 6.7.6, Evac 2.6.0 (GIT FDS6.7.6-226)
  All material properties etc. are completely fabricated.
 
  IMO MSC.1/Circ.1238 (30 October 2007) 'Guidelines For
@@ -6,24 +6,19 @@
  Annex 3 'Guidance on Validation/Verification of Evacuation
  Simulation Tools'
 
- Component testing, Test 7: demographics, more agents
-'IMO_Male<30'    'IMO_Female<30'    
-'IMO_Male30-50'  'IMO_Female30-50'  
-'IMO_Male>50'    'IMO_Female>50'    
-'IMO_Male>50MI1' 'IMO_Female>50MI1' 
-'IMO_Male>50MI2' 'IMO_Female>50MI2' 
+ Component testing, Test 7: demographics
 
-&HEAD CHID='CompTest7_A', TITLE='IMO Component Test7' /
+&HEAD CHID='CompTest7', TITLE='IMO Component Test7' /
 
-&MESH IJK=30,30,1, XB=0.0,30.0, 0.0,30.0, 0.95,1.05, EVACUATION=.TRUE., 
+&MESH IJK=60,60,1, XB=0.0,15.0, 0.0,15.0, 0.95,1.05, EVACUATION=.TRUE., 
       EVAC_HUMANS=.TRUE., EVAC_Z_OFFSET=1.0, ID='FF1stFloor' /
 
-&TIME T_END=0.1, DT=0.1 /
+&TIME T_END=100.0, DT=0.1 /
 
  Note: RADIATION=.FALSE. speeds up and saves memory, if only
        an evacuation calculation is done (no fire meshes at all).
 
-&MISC EVACUATION_DRILL=.TRUE. /
+&MISC EVACUATION_DRILL=.TRUE., EVACUATION_INITIALIZATION=.TRUE. /
 &RADI RADIATION=.FALSE. /
 
  Note: suppress fire related output, because just evacuation
@@ -36,9 +31,9 @@
        0.05 s) on the TIME-namelist.
 
 &DUMP SMOKE3D=.FALSE.,
-      NFRAMES=10,
-      DT_PART=1.0,
-      DT_HRR=1.0,
+      NFRAMES=100,
+      DT_PART=0.1,
+      DT_HRR=0.1,
       DT_SLCF=1000000.0,
       DT_PL3D=1000000.0,
       DT_ISOF=1000000.0 /
@@ -53,6 +48,10 @@
 ============= FIRE FDS GEOMETRY STARTS ================
 =======================================================
 
+&OBST XB =  0.0, 1.0,  0.0, 3.0, 0.0,2.0, SURF_ID='INERT' / 
+&OBST XB =  0.0,15.0,  0.0, 1.0, 0.0,2.0, SURF_ID='INERT' / 
+&OBST XB = 14.0,15.0,  0.0,15.0, 0.0,2.0, SURF_ID='INERT' / 
+&OBST XB =  0.0,12.0, 14.0,15.0, 0.0,2.0, SURF_ID='INERT' / 
 
 =======================================================
 ============= FIRE FDS GEOMETRY ENDS ==================
@@ -64,7 +63,8 @@
 
 &EXIT ID='FinalExit', IOR= +2,
       FYI='Comment line',
-      XB = 12.0,14.0, 30.0,30.0, 0.95,1.05 /
+      XYZ= 13.0, 13.5, 1.0,
+      XB = 12.0,14.0, 15.0,15.0, 0.95,1.05 /
 
 =======================================================
 ============= EVAC GEOMETRY ENDS ======================
@@ -80,49 +80,24 @@
  and (t_pre + t_det) is the time when agents start to move
  towards the exit doors.
 
-&PERS ID='IMO_Male<30', DEFAULT_PROPERTIES='IMO_Male<30', DENS_INIT=4.0 ,
-      I_HERDING_TYPE=2,/
-&PERS ID='IMO_Male30-50', DEFAULT_PROPERTIES='IMO_Male30-50'  /
-&PERS ID='IMO_Male>50', DEFAULT_PROPERTIES='IMO_Male>50'  /
-&PERS ID='IMO_Male>50MI1', DEFAULT_PROPERTIES='IMO_Male>50MI1'  /
-&PERS ID='IMO_Male>50MI2', DEFAULT_PROPERTIES='IMO_Male>50MI2'  /
-&PERS ID='IMO_Female<30', DEFAULT_PROPERTIES='IMO_Female<30'  /
-&PERS ID='IMO_Female30-50', DEFAULT_PROPERTIES='IMO_Female30-50'  /
-&PERS ID='IMO_Female>50' , DEFAULT_PROPERTIES='IMO_Female>50'   /
-&PERS ID='IMO_Female>50MI1', DEFAULT_PROPERTIES='IMO_Female>50MI1'  /
-&PERS ID='IMO_Female>50MI2', DEFAULT_PROPERTIES='IMO_Female>50MI2'  /
+&PERS ID='Imo1', FYI='Imo, 30-50 males',
+      DEFAULT_PROPERTIES='Male',
+      VELOCITY_DIST=1, VEL_LOW=0.97,VEL_HIGH=1.62,
+      PRE_EVAC_DIST=0, PRE_MEAN=1.0,
+      DET_EVAC_DIST=0, DET_MEAN=0.0,
+      AVATAR_COLOR= 'BLUE',
+      TDET_SMOKE_DENS=0.1, HUMAN_SMOKE_HEIGHT=1.60,
+      DENS_INIT=4.0, COLOR_METHOD= 0,
+      I_HERDING_TYPE=2,  /
 
  Initial position of the humans
-&EVAC ID= 'Evac_Male<30', PERS_ID= 'IMO_Male<30',
-      NUMBER_INITIAL_PERSONS=100, AGENT_TYPE=2,
-      XB= 1.0,29.0, 1.0,29.0, 1.0,1.0, / 
-&EVAC ID= 'Evac_Male30-50', PERS_ID= 'IMO_Male30-50',
-      NUMBER_INITIAL_PERSONS=100, AGENT_TYPE=2,
-      XB= 1.0,29.0, 1.0,29.0, 1.0,1.0, / 
-&EVAC ID= 'Evac_Male>50', PERS_ID= 'IMO_Male>50',
-      NUMBER_INITIAL_PERSONS=100, AGENT_TYPE=2,
-      XB= 1.0,29.0, 1.0,29.0, 1.0,1.0, / 
-&EVAC ID= 'Evac_Male>50MI1', PERS_ID= 'IMO_Male>50MI1',
-      NUMBER_INITIAL_PERSONS=100, AGENT_TYPE=2,
-      XB= 1.0,29.0, 1.0,29.0, 1.0,1.0, / 
-&EVAC ID= 'Evac_Male>50MI2', PERS_ID= 'IMO_Male>50MI2',
-      NUMBER_INITIAL_PERSONS=100, AGENT_TYPE=2,
-      XB= 1.0,29.0, 1.0,29.0, 1.0,1.0, / 
-&EVAC ID= 'Evac_Female<30', PERS_ID= 'IMO_Female<30',
-      NUMBER_INITIAL_PERSONS=100, AGENT_TYPE=2,
-      XB= 1.0,29.0, 1.0,29.0, 1.0,1.0, / 
-&EVAC ID= 'Evac_Female30-50', PERS_ID= 'IMO_Female30-50',
-      NUMBER_INITIAL_PERSONS=100, AGENT_TYPE=2,
-      XB= 1.0,29.0, 1.0,29.0, 1.0,1.0, / 
-&EVAC ID= 'Evac_Female>50', PERS_ID= 'IMO_Female>50',
-      NUMBER_INITIAL_PERSONS=100, AGENT_TYPE=2,
-      XB= 1.0,29.0, 1.0,29.0, 1.0,1.0, / 
-&EVAC ID= 'Evac_Female>50MI1', PERS_ID= 'IMO_Female>50MI1',
-      NUMBER_INITIAL_PERSONS=100, AGENT_TYPE=2,
-      XB= 1.0,29.0, 1.0,29.0, 1.0,1.0, / 
-&EVAC ID= 'Evac_Female>50MI2', PERS_ID= 'IMO_Female>50MI2',
-      NUMBER_INITIAL_PERSONS=100, AGENT_TYPE=2,
-      XB= 1.0,29.0, 1.0,29.0, 1.0,1.0, / 
+&EVAC ID= 'Evac_Imo1', FYI= 'Comment line',
+      NUMBER_INITIAL_PERSONS=50,
+      XB= 1.5,7.0, 1.3,12.7, 1.0,1.0,
+      AVATAR_COLOR='BLACK', AGENT_TYPE=2,
+      PERS_ID= 'Imo1' / 
 
+ Next line could be used to plot the evacuation flow fields:
+ SLCF PBZ= 1.0, QUANTITY='VELOCITY', VECTOR= .TRUE., EVACUATION=.TRUE. / 
 
 &TAIL /

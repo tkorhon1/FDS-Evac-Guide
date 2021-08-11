@@ -1,4 +1,4 @@
- FDS+Evac version: FDS 6.7.0, Evac 2.5.2 (GIT FDS6.7.0-31)
+ FDS+Evac version: FDS 6.7.6, Evac 2.6.0 (GIT FDS6.7.6-226)
  All material properties etc. are completely fabricated.
 
  This test case is a verification case for the door selection
@@ -16,7 +16,7 @@
 &TIME T_END=100.0, DT=0.1, /
  
 &MISC NOISE=.FALSE.,
-      EVACUATION_MC_MODE=.TRUE., EVACUATION_DRILL=.TRUE., /
+      EVACUATION_INITIALIZATION=.TRUE., EVACUATION_DRILL=.TRUE., /
 &RADI RADIATION=.FALSE./
 
 &DUMP SMOKE3D=.FALSE.,

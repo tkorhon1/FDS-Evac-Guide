@@ -1,10 +1,10 @@
- FDS+Evac version: FDS 6.7.0, Evac 2.5.2 (GIT FDS6.7.0-31)
+ FDS+Evac version: FDS 6.7.6, Evac 2.6.0 (GIT FDS6.7.6-226)
  All material properties etc. are completely fabricated.
 
  This test case is a verification case for the door selection
  algorithm.
  
-&HEAD CHID='DoorAlgo_C',TITLE='test A for door algorithm' /
+&HEAD CHID='DoorAlgo_Cb',TITLE='test A for door algorithm' /
 
  Fire mesh, dx=dy=dz= 0.5 m
 &MESH IJK=100, 80, 4 XB=0.0,50.0, 0.0,40.0, 0.0,2.0 /
@@ -15,8 +15,7 @@
 
 &TIME T_END=100.0, DT=0.1, /
  
-&MISC NOISE=.FALSE.,
-      EVACUATION_MC_MODE=.FALSE., EVACUATION_DRILL=.FALSE., /
+&MISC NOISE=.FALSE., EVACUATION_WRITE_FED=.TRUE.,  /
 &RADI RADIATION=.FALSE./
 
 &DUMP SMOKE3D=.TRUE.,

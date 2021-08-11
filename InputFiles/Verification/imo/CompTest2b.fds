@@ -1,4 +1,4 @@
- FDS+Evac version: FDS 6.6.0, Evac 2.5.2 (GIT FDS6.6.0-914)
+ FDS+Evac version: FDS 6.7.6, Evac 2.6.0 (GIT FDS6.7.6-226)
  All material properties etc. are completely fabricated.
 
  IMO MSC.1/Circ.1238 (30 October 2007) 'Guidelines For
@@ -22,7 +22,7 @@
  Note: RADIATION=.FALSE. speeds up and saves memory, if only
        an evacuation calculation is done (no fire meshes at all).
 
-&MISC EVACUATION_DRILL=.TRUE. /
+&MISC EVACUATION_DRILL=.TRUE., EVACUATION_INITIALIZATION=.TRUE. /
 &RADI RADIATION=.FALSE. /
 
  Note: suppress fire related output, because just evacuation

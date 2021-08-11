@@ -1,7 +1,7 @@
- FDS+Evac version: FDS 6.7.0, Evac 2.5.2 (GIT FDS6.7.0-31)
+ FDS+Evac version: FDS 6.7.6, Evac 2.6.0 (GIT FDS6.7.6-226)
  All material properties are completely fabricated.
 
-&HEAD CHID='soot_vs_speed_MPI_1500', TITLE='Test soot dens vs speed'  / 
+&HEAD CHID='soot_vs_speed_0C', TITLE='Test soot dens vs speed'  / 
 
  The fire mesh, the test case uses constant fire properties, 
  so the fire mesh need not to be dense (now dx=dy=dz= 0.5 m)
@@ -28,7 +28,7 @@
  p=101325.0 Pa
  pV=(m/M)RT ==> rho = pM/(RT) =  1.19844757 kg/m3
 
-&MISC TMPA=20.0, NOISE=.FALSE., /
+&MISC TMPA=20.0, NOISE=.FALSE., EVACUATION_MC_MODE=.TRUE.,/
 &RADI RADIATION=.FALSE., /
  SPEC ID='AIR', BACKGROUND=.TRUE. / now simple chemistry is used, no backround given
 
@@ -46,7 +46,7 @@
 INIT: MASS_FRACTION(II) Real Array Initial value of species II kg/kg Ambient
       XB(6)
 
-&SPEC ID='SOOT', MASS_FRACTION_0=0.00125162 / 1500 mg/m3
+&SPEC ID='SOOT', MASS_FRACTION_0=0.0 / 0 mg/m3
 
  Used speed reduction formula uses kg/m3,
  Density of 20 C air is about 1.19844757 kg/m3
@@ -93,7 +93,7 @@ mg/m3  kg/kg
 
  Initial positions of the humans
 
-&EVAC ID = 'HumanRightDoorKnown', 
+&EVAC ID = 'HumanRightDoorKnown', ANGLE=0.0,
       NUMBER_INITIAL_PERSONS = 1,
       XB = 1.0,1.0, 1.0,1.0, 1.4,1.6
       AVATAR_COLOR= 'BLUE',

@@ -1,10 +1,10 @@
- FDS+Evac version: FDS 6.7.0, Evac 2.5.2 (GIT FDS6.7.0-31)
+ FDS+Evac version: FDS 6.7.6, Evac 2.6.0 (GIT FDS6.7.6-226)
  All material properties etc. are completely fabricated.
 
  This test case is a verification case for the door selection
  algorithm.
  
-&HEAD CHID='DoorAlgo_D',TITLE='test A for door algorithm' /
+&HEAD CHID='DoorAlgo_Cc',TITLE='test A for door algorithm' /
 
  Fire mesh, dx=dy=dz= 0.5 m
 &MESH IJK=100, 80, 4 XB=0.0,50.0, 0.0,40.0, 0.0,2.0 /
@@ -13,11 +13,9 @@
 &MESH IJK=100, 80, 1, XB=0.0,50.0, 0.0,40.0, 1.45,1.55, EVAC_Z_OFFSET=0.5,
       EVACUATION=.TRUE.,  EVAC_HUMANS=.TRUE., ID='FF1stFloor'  /
 
- 
 &TIME T_END=100.0, DT=0.1, /
  
-&MISC NOISE=.FALSE.,
-      EVACUATION_MC_MODE=.FALSE., EVACUATION_DRILL=.FALSE., /
+&MISC NOISE=.FALSE., EVACUATION_MC_MODE=.TRUE.,  /
 &RADI RADIATION=.FALSE./
 
 &DUMP SMOKE3D=.TRUE.,
@@ -146,7 +144,7 @@
       PRE_EVAC_DIST=0, PRE_MEAN=5.0,
       DET_EVAC_DIST=0, DET_MEAN=0.0,
       L_NON_SP=0.3, NOT_RANDOM= .TRUE.,
-      COLOR_METHOD= 5, FED_DOOR_CRIT= -3000.0, TAU_CHANGE_DOOR=0.1,
+      COLOR_METHOD= 4, FED_DOOR_CRIT= -3000.0, TAU_CHANGE_DOOR=0.1,
       TDET_SMOKE_DENS= 1.0, HUMAN_SMOKE_HEIGHT=0.75,
       OUTPUT_FED=.TRUE., OUTPUT_SPEED=.TRUE.,
       I_HERDING_TYPE=2, /
